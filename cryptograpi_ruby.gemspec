@@ -3,14 +3,14 @@ require File.expand_path('lib/cryptograpi_ruby/version', __dir__)
 Gem::Specification.new do |spec|
   spec.name                       = 'cryptograpi_ruby'
   spec.version                    = CryptograpiRuby::VERSION
-  spec.authors                    = ['Rodolfo Ruiz']
-  spec.email                      = ['rodolfo@cryptograpi.com']
+  spec.authors                    = ['Cryptograpi']
+  spec.email                      = ['support@cryptograpi.com']
   spec.summary                    = 'Cryptograpi library for ruby apps'
   spec.description                = 'Allows the communication with cryptograpi api'
   spec.homepage                   = 'https://cryptograpi.com'
   spec.license                    = 'GPL-3.0-only'
   spec.platform                   = Gem::Platform::RUBY
-  spec.required_ruby_version      = '>=2.5.0'
+  spec.required_ruby_version      = '>=2.7.0'
   spec.files                      = Dir['README.md', 'LICENSE', 'CHANGELOG.md', 'lib/**/*.rb',
                                         'lib/**/*.rake', 'cryptograpi_ruby.gemspec', '.github/*.md',
                                         'Gemfile', 'Rakefile']
