@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.summary                    = 'Cryptograpi library for ruby apps'
   spec.description                = 'Allows the communication with cryptograpi api'
   spec.homepage                   = 'https://cryptograpi.com'
-  spec.license                    = 'GPL-3.0-only'
+  spec.license                    = 'MIT'
   spec.platform                   = Gem::Platform::RUBY
   spec.required_ruby_version      = '>=2.7.0'
   spec.files                      = Dir['README.md', 'LICENSE', 'CHANGELOG.md', 'lib/**/*.rb',
