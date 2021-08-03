@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require File.expand_path('lib/cryptograpi_ruby/version', __dir__)
 
 Gem::Specification.new do |spec|
@@ -15,13 +17,13 @@ Gem::Specification.new do |spec|
                                         'lib/**/*.rake', 'cryptograpi_ruby.gemspec', '.github/*.md',
                                         'Gemfile', 'Rakefile']
   spec.extra_rdoc_files           = ['README.md']
-#  spec.add_dependency             'cryptograpi_api', '~>0.1'
+  # spec.add_dependency             'cryptograpi_api', '~>0.1'
   spec.add_dependency             'rubyzip', '~> 2.3'
   spec.add_development_dependency 'rubocop', '~> 1.18'
   spec.add_development_dependency 'rubocop-performance', '~> 1.11'
   spec.add_development_dependency 'rubocop-rspec', '~> 2.4'
-  spec.add_runtime_dependency     'rb-readline', '~> 0.5'
-  spec.add_runtime_dependency     'httparty', '~> 0.18'
-  spec.add_runtime_dependency     'webrick', '~> 1.7'
   spec.add_runtime_dependency     'activesupport', '~> 6.1'
+  spec.add_runtime_dependency     'httparty', '~> 0.18'
+  spec.add_runtime_dependency     'rb-readline', '~> 0.5'
+  spec.add_runtime_dependency     'webrick', '~> 1.7'
 end
