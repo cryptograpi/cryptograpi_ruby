@@ -29,6 +29,11 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'simplecov', '~> 0.16'
   spec.add_development_dependency 'vcr', '~> 6.0'
 
+  # Use an embedded rails app for testing
+  spec.add_development_dependency 'rails', '~> 6.1'
+  spec.add_development_dependency 'rspec-rails', '~> 4.0'
+
+
 
   spec.add_runtime_dependency     'activesupport', '~> 6.1'
   spec.add_runtime_dependency     'httparty', '~> 0.18'
