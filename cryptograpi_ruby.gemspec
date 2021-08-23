@@ -36,7 +36,9 @@ Gem::Specification.new do |spec|
 
 
   spec.add_runtime_dependency     'activesupport', '~> 6.1'
+  spec.add_runtime_dependency     'configparser', '>=0.1'
   spec.add_runtime_dependency     'httparty', '~> 0.18'
   spec.add_runtime_dependency     'rb-readline', '~> 0.5'
+  spec.add_runtime_dependency     'tzinfo-data', '>= 1'
   spec.add_runtime_dependency     'webrick', '~> 1.7'
 end
