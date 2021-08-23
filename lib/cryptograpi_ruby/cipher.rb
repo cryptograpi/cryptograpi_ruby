@@ -3,6 +3,9 @@ require 'openssl'
 
 module Cryptograpi
   class Cipher
+
+    CRYPTOFLAG = 0b0000001
+
     def set_algorithm
       @algorithm = {
         'aes-128-gcm' => {
