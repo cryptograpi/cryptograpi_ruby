@@ -14,27 +14,25 @@ module Cryptograpi
       created_at = Time.now.to_i
 
       # We hash the body of the HTTP message. Even if it's empty
-      ha_sha512 = OpenSSL::Digest::SHA512.new
+      ha_sha512 = OpenSSL::Digest.new('SHA512')
       ha_sha512 << JSON.dump(query)
-      digest = 'SHA-512=' + Base64.strict_encode64(ha_sha512.digest)
+      digest = "SHA-512=#{Base64.strict_encode64(ha_sha512.digest)}"
 
       # Initialize headers
       header_signature = {}
-      header_signature['user-agent'] = 'cryptograpi_ruby/' + Cryptograpi::VERSION
+      header_signature['user-agent'] = "cryptograpi_ruby/#{Cryptograpi::VERSION}"
       header_signature['content-type'] = 'application/json'
       header_signature['(request-target'] = req_target
-      header_signature['date'] = get_date
+      header_signature['date'] = sign_date
       header_signature['host'] = get_host(host)
       header_signature['(created)'] = created_at
       header_signature['digest'] = digest
-      headers = ['content-type', 'date', 'host', '(created)', '(request-target)', 'digest']
+      headers = %w[content-type date host (created) (request-target) digest]
 
       # Calculate HMAC including the headers
-      hmac = OpenSSL::HMAC.new(sapi, OpenSSL::Digest::SHA512.new)
+      hmac = OpenSSL::HMAC.new(sapi, OpenSSL::Digest.new('SHA512'))
       headers.each do |header|
-        if header_signature.key?(header)
-          hmac << "#{header}: #{header_signature[header]}\n"
-        end
+        hmac << "#{header}: #{header_signature[header]}\n" if header_signature.key?(header)
       end
 
       header_signature.delete('(created)')
@@ -42,26 +40,25 @@ module Cryptograpi
       header_signature.delete('(host)')
 
       # Build the final signature
-      header_signature['signature'] = 'keyId="' + papi + '"'
+      header_signature['signature'] = "keyId=\"#{papi}\""
       header_signature['signature'] += ', algorithm="hmac-sha512"'
-      header_signature['signature'] += ', created=' + created_at.to_s
-      header_signature['signature'] += ', headers=' + headers.join(' ') + '"'
+      header_signature['signature'] += ", created=#{created_at}"
+      header_signature['signature'] += ", headers=#{headers.join(' ')}\""
       header_signature['signature'] += ', signature='
       header_signature['signature'] += Base64.strict_encode64(hmac.digest)
       header_signature['signature'] += '"'
 
-      return header_signature
+      header_signature
     end
 
-    def self.get_date
-      DateTime.now.in_time_zone('GMT').strftime('%a, %d %b %Y') + ' ' +
-        DateTime.now.in_time_zone('GMT').strftime('%H:%M:%S') + ' GMT'
+    def self.sign_date
+      "#{DateTime.now.in_time_zone('GMT').strftime('%a, %d %b %Y')} #{DateTime.now.in_time_zone('GMT').strftime('%H:%M:%S')} GMT"
     end
 
     def self.get_host(host)
       uri = URI(host)
       ret = uri.hostname.to_s
-      ret += ":#{uri.port}" if host.match(/:[0-9]/)
+      ret += ":#{uri.port}" if /:[0-9]/.match?(host)
       ret
     end
   end
