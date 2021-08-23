@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'configparser'
+require 'rb-readline'
 require_relative './host.rb'
 
 module Cryptograpi
